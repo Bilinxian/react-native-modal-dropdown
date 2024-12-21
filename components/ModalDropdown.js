@@ -5,14 +5,14 @@ import {
   View,
   Text,
   TouchableWithoutFeedback,
+  TouchableNativeFeedback,
   TouchableOpacity,
   TouchableHighlight,
   Modal,
   ActivityIndicator,
   FlatList,
   Platform,
-  TextInput,
-  I18nManager
+  TextInput
 } from 'react-native';
 import PropTypes from 'prop-types';
 
@@ -434,7 +434,7 @@ export default class ModalDropdown extends Component {
         data={options}
         ref={component => (this.flatList = component)}
         scrollEnabled={scrollEnabled}
-        initialScrollIndex={saveScrollPosition ? selectedIndex : -1}
+        // initialScrollIndex={saveScrollPosition ? selectedIndex : -1}
         style={styles.list}
         keyExtractor={(item, i) => (`key-${i}`)}
         renderItem={this._renderItem}
@@ -442,7 +442,7 @@ export default class ModalDropdown extends Component {
         automaticallyAdjustContentInsets={false}
         showsVerticalScrollIndicator={showsVerticalScrollIndicator}
         keyboardShouldPersistTaps={keyboardShouldPersistTaps}
-        ListHeaderComponent={ dropdownListProps.ListHeaderComponent? dropdownListProps.ListHeaderComponent: this._renderSearchInput}
+        ListHeaderComponent={this._renderSearchInput}
         onScrollToIndexFailed={info => {
           const wait = new Promise(resolve => setTimeout(resolve, 500));
           wait.then(() => {
@@ -541,7 +541,6 @@ const styles = StyleSheet.create({
   },
   modal: {
     flexGrow: 1,
-    flexDirection: I18nManager.isRTL ? 'row-reverse' : 'row'
   },
   dropdown: {
     position: 'absolute',
